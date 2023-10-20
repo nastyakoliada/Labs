@@ -6,7 +6,13 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        int[] array = new int[] { -5, 8, 33, -105, 1, 0, 90, -888, 0, -3, 17 };
+        Console.WriteLine("Задание 1.1:");
+        Random random = new Random();
+        // Задание 1.1 одномерный массив (16 вар)
+
+        int[] array = new int[25];
+        
+        for (int i = 0; i < array.Length; i++) array[i] = random.Next(-100, 100);
         int sum = 0;
         int sum2 = 0;
         bool zeroInArray = false;
@@ -25,8 +31,8 @@ internal class Program
         }
         if (!zeroInArray)
             sum2 = 0;
-        Console.WriteLine(sum);
-        Console.WriteLine(sum2);
+        Console.WriteLine($"{sum} положительных элементов") ;
+        Console.WriteLine($"сумма элементов после последнего нуля = {sum2} ");
 
         for (int i = 0; i < array.Length; i++)
         {// -6 1 3 -5 4 -9
@@ -54,5 +60,52 @@ internal class Program
             Console.Write(array[i] + " ");
         }
         Console.ReadLine();
+
+        // Задание 1.2 Матрицы (вар. 16)
+
+        Console.WriteLine("Задание 1.2:");
+        double[][] matrix = new double[4][];
+        for (int i = 0; i < matrix.Length; i++) matrix[i] = new double[4];
+
+        HashSet<double> values = new HashSet<double>();
+
+        foreach (var line in matrix)
+        {
+            for (int j = 0; j < line.Length; j++)
+            {
+                line[j] = random.Next(-999, 999) / 10.0;
+                values.Add(line[j]);
+            }
+        }
+        PrintMatrix(matrix);
+
+        int position = 0;
+        foreach (var line in matrix)
+        {
+            line[position] = values.Max();
+            values.Remove(line[position++]);
+        }
+        PrintMatrix(matrix);
+
+        position = 0;
+        foreach (var line in matrix)
+        {
+            if (line.Where(e => e>0).Select(e => true).FirstOrDefault())
+            {
+                position++;
+                continue;
+            }
+            Console.WriteLine(position);
+            break;
+        }   
+
+    }
+
+    public static void PrintMatrix(double[][] matrix) {
+    foreach (var line in matrix)
+        {
+            Console.WriteLine(string.Join(" ", line.Select(x => x.ToString())));
+        }
+        Console.WriteLine("------------------------------------------");
     }
 }
