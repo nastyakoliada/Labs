@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/.vs/Labs/DesignTimeBuild/.dtbcache.v2
+/Laba1/Program — копия.cs
